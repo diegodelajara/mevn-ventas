@@ -3,7 +3,7 @@ import models from '../models'
 export default {
   add: async (req, res, next) => {
     try {
-      const reg = await models.categoria.create(req.body)
+      const reg = await models.articulo.create(req.body)
       res.status(200).json(reg)
     } catch (e) {
       res.status(500).send({
@@ -14,7 +14,8 @@ export default {
   },
   query: async (req, res, next) => {
     try {
-      const reg = await models.categoria.findOne({_id: req.query._id})
+      const reg = await models.articulo.findOne({_id: req.query._id})
+      .populate('categoria', {nombre: 1})
       if (!reg) {
         res.status(404).send({
           message: 'registro no existe'
@@ -32,7 +33,7 @@ export default {
   list: async (req, res, next) => {
     try {
       let valor = req.query.valor
-      const reg = await models.categoria.find(
+      const reg = await models.articulo.find(
         {
           $or:[
             { nombre: new RegExp(valor, 'i') },
@@ -41,12 +42,15 @@ export default {
         },
         // parametros que excluye al listar
         {
+          // nombre: 1
           // _id: 0,
           // estado: 0,
           // createdAt: 0,
           // descripcion: 0
         }
-      ).sort({createdAt: -1})
+      )
+      .populate('categoria', {nombre: 1})
+      .sort({createdAt: -1})
       res.status(200).json(reg)
     } catch (e) {
       res.status(500).send({
@@ -57,13 +61,18 @@ export default {
   },
   update: async (req, res, next) => {
     try {
-      const reg = await models.categoria.findByIdAndUpdate(
+      const reg = await models.articulo.findByIdAndUpdate(
         {
           _id: req.body._id
         },
         {
+          categoria: req.body.categoria,
+          codigo: req.body.codigo,
           nombre: req.body.nombre,
-          descripcion: req.body.descripcion
+          descripcion: req.body.descripcion,
+          precioVenta: req.body.precioVenta,
+          stock: req.body.stock,
+          descripcion: req.body.descripcion,
         }
       )
       res.status(200).json(reg)
@@ -76,7 +85,7 @@ export default {
   },
   remove: async (req, res, next) => {
     try {
-      const reg = await models.categoria.findByIdAndDelete({_id: req.body._id})
+      const reg = await models.articulo.findByIdAndDelete({_id: req.body._id})
       res.status(200).json(reg)
     } catch (e) {
       res.status(500).send({
@@ -87,7 +96,7 @@ export default {
   },
   activate: async (req, res, next) => {
     try {
-      const reg = await models.categoria.findByIdAndUpdate({_id: req.body._id}, {estado: 1})
+      const reg = await models.articulo.findByIdAndUpdate({_id: req.body._id}, {estado: 1})
       res.status(200).json(reg)
     } catch (e) {
       res.status(500).send({
@@ -98,7 +107,7 @@ export default {
   },
   desactivate: async (req, res, next) => {
     try {
-      const reg = await models.categoria.findByIdAndUpdate({_id: req.body._id}, {estado: 0})
+      const reg = await models.articulo.findByIdAndUpdate({_id: req.body._id}, {estado: 0})
       res.status(200).json(reg)
     } catch (e) {
       res.status(500).send({
