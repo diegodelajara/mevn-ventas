@@ -4,7 +4,7 @@ import cors from 'cors'
 import path from 'path'
 import mongoose from 'mongoose'
 import router from './routes'
-import mongodb from 'mongodb'
+// import mongodb from 'mongodb'
 
 // Conexión a la BD
 mongoose.Promise = global.Promise
