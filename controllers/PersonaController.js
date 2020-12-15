@@ -98,7 +98,7 @@ export default {
             { nombre: new RegExp(valor, 'i') },
             { email: new RegExp(valor, 'i') }
           ],
-          'tipoPersona': 'Proveedor'
+          'tipoPersona': 'proveedor'
         },
         // parametros que excluye al listar
         {
