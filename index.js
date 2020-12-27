@@ -8,7 +8,7 @@ import router from './routes'
 
 // Conexión a la BD
 mongoose.Promise = global.Promise
-const dbUrl = 'mongodb+srv://ddelajara:renato2013@cluster0.3ndti.mongodb.net/Cluster0?retryWrites=true&w=majority'
+const dbUrl = 'mongodb+srv://<user>:<pass>@cluster0.3ndti.mongodb.net/Cluster0?retryWrites=true&w=majority'
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
   .then(mongoose => console.log('conectado'))
   .catch(e => console.log(e))
