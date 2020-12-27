@@ -1,14 +1,16 @@
+import { Long } from 'mongodb'
 import mongoose, {Schema} from 'mongoose'
 
-const ingresoSchema = new Schema({
-  usuario: { type: Schema.ObjectId, ref: 'usuario', required: true},
-  persona: { type: Schema.ObjectId, ref: 'persona', required: true},
+const ventaSchema = new Schema({
+  usuario: { type: String, maxlength: 50, required: true, ref: 'usuario'},
+  persona: { type: String, maxlength: 50, required: true, ref: 'persona'},
   tipoComprobante: { type: String, maxlength: 50, required: true},
-  numComprobante: { type: String, maxlength: 255, required: true},
+  numComprobante: { type: Number, maxlength: 255, required: true},
   serieComprobante: { type: String, maxlength: 7},
   impuesto: { type: Number, maxlength: 255, required: true},
   total: { type: Number, maxlength: 255, required: true},
-  detalles: [{
+  detalles: [
+    {
     _id: {
       type: String,
       required: true
@@ -24,6 +26,10 @@ const ingresoSchema = new Schema({
     precio:{
       type: Number,
       required: true
+    },
+    dscto:{
+      type: Number,
+      required: true
     }
   }],
   nombre: { type: String, maxlength: 50 },
@@ -31,6 +37,6 @@ const ingresoSchema = new Schema({
   createdAt: { type: Date, default: Date.now }
 })
 
-const ingreso = mongoose.model('ingreso', ingresoSchema)
+const venta = mongoose.model('venta', ventaSchema)
 
-export default ingreso
+export default venta

@@ -9,7 +9,7 @@ export default {
     } else {
       const {rol} = await tokenService.decode(req.headers.token)
       if (
-        rol === 'superadministrator' || rol === 'conserje' || rol === 'comite') {
+        rol === 'superadministrator' || rol === 'vendedor' || rol === 'almacenero') {
         next()
       } else {
         return res.status(403).json({
@@ -36,7 +36,7 @@ export default {
       }
     }
   },
-  verifyConserje: async (req, res, next) => {
+  verifyVendedor: async (req, res, next) => {
     if (!req.headers.token) {
       res.status(404).json({
         message: 'no token'
@@ -44,7 +44,7 @@ export default {
     } else {
       const {rol} = await tokenService.decode(req.headers.token)
       if (
-        rol === 'superadministrator' || rol === 'conserje') {
+        rol === 'superadministrator' || rol === 'vendedor') {
         next()
       } else {
         return res.status(403).json({
@@ -53,7 +53,7 @@ export default {
       }
     }
   },
-  verifyComite: async (req, res, next) => {
+  verifyAlmacenero: async (req, res, next) => {
     if (!req.headers.token) {
       res.status(404).json({
         message: 'no token'
@@ -61,7 +61,7 @@ export default {
     } else {
       const {rol} = await tokenService.decode(req.headers.token)
       if (
-        rol === 'superadministrator' || rol === 'comite') {
+        rol === 'superadministrator' || rol === 'almacenero') {
         next()
       } else {
         return res.status(403).json({
