@@ -134,7 +134,7 @@ export default {
       if (user) {
         const equalPass = await bcrypt.compare(req.body.password, user.password)
         if (equalPass) {
-          let tokenReturn = await token.encode(user._id)
+          let tokenReturn = await token.encode(user._id, user.rol, user.email)
           res.status(200).send({
             user,
             tokenReturn
