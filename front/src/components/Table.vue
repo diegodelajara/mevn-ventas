@@ -57,13 +57,8 @@
             </v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete"
-                >Cancel</v-btn
-              >
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                >OK</v-btn
-              >
-              <v-spacer></v-spacer>
+              <v-btn color="blue" text @click="closeDelete">Cancel</v-btn>
+              <v-btn color="primary" depressed @click="deleteItemConfirm">Aceptar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -87,9 +82,9 @@
       </td>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-      <v-icon v-if="item.estado === 1" small @click="desactivar(item)">block</v-icon>
-      <v-icon v-else small @click="activar(item)">check</v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)" color="cyan"> mdi-pencil </v-icon>
+      <v-icon v-if="item.estado === 1" small @click="desactivar(item)" color="error">block</v-icon>
+      <v-icon v-else small @click="activar(item)" color="success">check</v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
