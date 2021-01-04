@@ -53,7 +53,7 @@ export default {
         }
       )
       .populate('categoria', {nombre: 1})
-      .sort({createdAt: -1})
+      .sort({nombre: -1})
       res.status(200).json(reg)
     } catch (e) {
       res.status(500).send({

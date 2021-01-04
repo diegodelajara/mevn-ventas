@@ -1,13 +1,20 @@
 <template>
+  <div>
     <Table
-      formTitle="Agregar categoría"
+      tableTitle="Categorías"
+      formTitle="categoría"
+      cmpnt="NuevaCategoria"
       :headers="headers"
       :items="items"
-      @on-get-categorias="onGetCategorias"
+      @on-get-rows="onGetRows"
+      @on-reset="onGetRows"
     />
+    <v-snackbar v-model="snackbar">{{ text }}</v-snackbar>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import axios from 'axios'
 import Table from './Table'
 export default {
@@ -34,7 +41,7 @@ export default {
     this.getCategorias()
   },
   methods: {
-    onGetCategorias() {
+    onGetRows() {
       this.getCategorias()
     },
     async getCategorias() {
@@ -46,6 +53,19 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'snackbar'
+    ]),
+    mySnackbar: {
+      get() {
+        return this.snackbar
+      },
+      set(value) {
+        this.$store.commit('setSnackbar', value)
+      }
+    }
+  }
 }
 </script>
 

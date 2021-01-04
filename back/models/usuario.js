@@ -3,7 +3,7 @@ import mongoose, {Schema} from 'mongoose'
 const usuarioSchema = new Schema({
   rol: { type:String, maxlength: 50, required: true },
   nombre: { type:String, maxlength: 50, required: true },
-  numeroDocumento:  { type:Number, maxlength: 10, required: true },
+  numeroDocumento:  { type: String, maxlength: 12, required: true },
   tipoDocumento: { type:String, maxlength: 50, required: true },
   direccion: { type:String, maxlength: 255 },
   telefono: { type:String, maxlength: 20 },

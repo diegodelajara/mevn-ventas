@@ -1,13 +1,20 @@
 
 export const rules = {
   required: [
-    v => !!v || `Ingrese un nombre`
+    v => !!v || ``
   ],
-  // name: [
-  //   // v => !!v || 'Nombre es requerido',
-  //   v => !!v || '',
-  //   // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-  // ],
+  loginEmailRules: [
+    v => !!v || ``,
+    v => /.+@.+\..+/.test(v) || "E-mail debe ser válido"
+  ],
+  rolRequired: [
+    v => !!v || 'Ingrese un rol',
+    // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+  ],
+  rut: [
+    v => !!v || 'Ingrese un rol',
+    v => (v && v.length <= 12) || 'Rut debe tener 12 characters',
+  ],
   // incomeType: [
   //   v => !!v || '',
   //   // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
